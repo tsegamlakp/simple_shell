@@ -1,70 +1,49 @@
-.TH man 1 "Dic 07  2022"  "ALX School 0x16. C - Simple Shell"
+.TH "simple_shell" 1 "April 2019" ""
 .SH NAME
-    hsh - ALX Simple Shell: command line interpreter
-.PP
+simple_shell - a shell (standard command line interpreter)
 .SH SYNOPSIS
-.B hsh
-[command_string [arg...][file]]
-.PP
-.SH COPYRIGHT
-    Public Domain, no copyright protection
-.PP
+hsh [-abcDefg] [argument ...]
 .SH DESCRIPTION
-.B hsh
-is a basic imitation of a command line interpreter that reads and implements basic commands from user input as a shell would.
-.PP
-.B hsh
- is compiled on Ubuntu 20.04 LTS with gcc 4.8.4 (C90). It is built to run in both interactive and noninteractive mode.
-.PP
-.SH USER INPUT
-Once a user inputs a command and hits enter, the shell performs the following actions:
+The hsh utility reads and interprets a command line string, either in interactive or non-interactive mode. It then executes commands based on the input.  Both the local directory and PATH are searched.
+When applicable, the  function prints to stdout or stderr, the standard output and error stream, respectively.
+In interactive mode, the shell will prompt with \' $ \', and process the entered input upon a return stroke.  In non-interactive mode, standard output must be piped into the executable.
+.SH USAGE
+In addition to searching the path, the following features are supported.
+   exit - Exit shell with a specified exit status
+   env - Print a list of the environment variables
+   setenv - Set a new environment variable
+   unsetenv - Unset an environment variable
+   cd - Change directories
+   help - Prints help for built-ins
+   history - Displays numbered history list and prints to history file on exit
+   Ctrl-D - End of file: exit shell
+   Ctrl-C - Does NOT exit shell
+   ; - Command separator for command chaining
+   # - Comment indicator
+   && - AND Logical operator
+   || - OR Logical operator
+   < << >> > - Left and Right stream redirection
+   | - Pipe stream redirection
+   $? $$ - variable replacement
+   FILE - Can take a file as command line argument
+   $PS1 - Customizable PS1 prompt variable
 
-1. Splits the command into an array of words.
+.SH EXAMPLE USAGE
+cd -
 
-2. Looks for the command.
+env
 
-3. Executes the command.
+ls -l
 
-4. execve.
+exit 98
 
-5. exit.
+help -d
 
-6. fork.
-
-7. free.
-
-8. _getline.
-
-9. malloc.
-
-10. strtok,
-
-11. wait.
-
-12. write.
-
-.PP
-.SH SEARCH FOR COMMAND
-When locating a command, the shell looks for a built-in command by that name.
-If a built-in command is not found, the shell searches for the command in the PATH.
-.PP
-.SH EXECUTE COMMAND
-Commands are executed in a child process of the main process.
-.PP
-.SH BUILTINS
-.IP env
-Prints out all environment variables
-.IP exit
-Exits process and frees memory allocated.
-.PP
+.SH LIMITATIONS
+Word length - Buffers of 1024 characters are used in several aspects of the shell. Excessively long filenames or paths may cause errors.
 .SH BUGS
-There are memory leaks when exiting the shell.
-This will be fixed in a later version of this shell.
-.PP
+No known bugs at this time.
 .SH AUTHORS
-Mohammed Bheser <3723@holbertonschool.com>
-Cent Bedada <3729@holbertonschool.com>
-.PP
-.SH SEE ALSO
-.BR man
-.BR sh
+Written by Honelign Selamu and Rahel Daniel
+.SH IN PROGRESS
+The following features are currently in progress
